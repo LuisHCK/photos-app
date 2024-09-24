@@ -6,7 +6,7 @@ from django.dispatch import receiver
 from django.core.files import File
 from PIL import Image
 from io import BytesIO
-from customers.models import Customer
+from apps.customers.models import Customer
 from datetime import datetime, timedelta
 from django.utils.translation import gettext_lazy as _
 import os

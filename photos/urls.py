@@ -24,9 +24,9 @@ from django.contrib.auth import views as auth
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('dashboard/', include('dashboard.urls')),
     path("accounts/", include("django.contrib.auth.urls")),
-    path('sessions/', include('photo_sessions.urls')),
+    path('dashboard/', include('apps.dashboard.urls')),
+    path('sessions/', include('apps.photo_sessions.urls')),
     re_path(r'^rosetta/', include('rosetta.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

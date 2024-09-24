@@ -2,9 +2,9 @@ from django.shortcuts import redirect
 from django.views.generic.base import TemplateView, View
 from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from photo_sessions.models import Session, Photo
-from photo_sessions.forms import SessionForm
-from customers.models import Customer
+from apps.photo_sessions.models import Session, Photo
+from apps.photo_sessions.forms import SessionForm
+from apps.customers.models import Customer
 
 
 class DashboardPageView(LoginRequiredMixin, TemplateView):

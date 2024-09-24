@@ -50,9 +50,9 @@ INSTALLED_APPS = [
     'crispy_bulma',
     'rosetta',
     # Project apps
-    'photo_sessions',
-    'customers',
-    'dashboard'
+    'apps.photo_sessions',
+    'apps.customers',
+    'apps.dashboard'
 ]
 
 MIDDLEWARE = [

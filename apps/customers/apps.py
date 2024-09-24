@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class PhotoSessionsConfig(AppConfig):
+class CustomersConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'photo_sessions'
+    name = 'apps.customers'

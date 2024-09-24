@@ -1,23 +1,41 @@
 {% load crispy_forms_tags %}
+{% load i18n %}
+{% load custom_tags %}
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="color-scheme" content="light" />
-        <meta name="supported-color-schemes" content="light" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
-        <title>Memorias de Vida | Dashboard</title>
-    </head>
-    <body>
-        <section>
-            <div class="container">
-                <h1 class="title">Log In</h1>
-                <form action="." method="post">
-                    {% csrf_token %} {{ form|crispy }}
-                    <input type="submit" value="Sign Up" class="btn btn-primary" />
-                </form>
-            </div>
-        </section>
-    </body>
+
+<head>
+    <meta charset="UTF-8" />
+    <!-- Iconography -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png" />
+    <link rel="manifest" href="/static/site.webmanifest" />
+    <link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="#ccad8e" />
+    <meta name="msapplication-TileColor" content="#ccad8e" />
+    <meta name="theme-color" content="#ccad8e" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <meta name="supported-color-schemes" content="light" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+    <title>{% sitename %} | {% trans 'Login' %}</title>
+</head>
+
+<body>
+    <section class="login-container">
+        <div class="box p-6 form-container">
+            <h1 class="title">
+                {% trans 'Login' %}
+            </h1>
+            <form action="." method="post">
+                {% csrf_token %} {{ form|crispy }}
+                <input class="button is-primary is-fullwidth" type="submit" value="{% trans 'Submit' %}" class="btn btn-primary" />
+            </form>
+        </div>
+    </section>
+</body>
+
 </html>
