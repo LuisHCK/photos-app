@@ -1,0 +1,105 @@
+<!-- Extends base.html -->
+{% extends '_base.html' %}
+
+<!-- Load custom tags -->
+{% load custom_tags %}
+
+<!-- load translations -->
+{% load i18n %}
+
+<!-- Load static files -->
+{% load static %}
+
+<!-- Load css  -->
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/session.css' %}" />
+<script src="{% static 'js/bulma-modal.js' %}"></script>
+<script src="{% static 'js/public-session.js' %}"></script>
+<script src="{% static 'js/multi-download.js' %}"></script>
+
+<script>
+    const urls = `{% for photo in photos %}{{ photo.image.url }},{% endfor %}`
+        .split(',')
+        .filter((url) => url)
+    function downloadAllPhotos() {
+        multiDownload(urls)
+    }
+</script>
+{% endblock head %}
+
+<!-- navbar -->
+{% block navbar %} {% include 'partials/_nav.html' %} {% endblock navbar %}
+
+<!-- Title -->
+{% block title %} {% sitename %} | {{ session.customer }} {% endblock %}
+
+<!-- Content -->
+{% block content %}
+<h1 class="title">{% trans 'Hi'%} {{ session.customer }}</h1>
+
+<p class="mb-3 mt-0 notification is-rounded is-warning">
+    {% trans 'This photoshoot will be available for download until' %}
+    <strong>&nbsp;{{ session.expires_at|date:"d/M/Y h:i a" }}</strong>
+</p>
+
+<div class="session-main-section">
+    <!-- Gallery -->
+    <div class="gallery-container">
+        {% for photo in photos %}
+        <div class="image-container">
+            <button class="js-modal-trigger" data-target="bulma-modal" data-url="{{ photo.thumbnail.url }}"
+                onclick="openModal(event)">
+                <img src="{{ photo.thumbnail.url }}"
+                    alt="{% trans 'Session' %}#{{ session.id }} - {% trans 'Photo' %}#{{ photo.id }}" />
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- End Gallery -->
+
+    <!-- Support -->
+    <div class="mb-6 mt-6">
+        <article class="message is-info">
+            <div class="message-header">
+                <p>{% trans 'Need help?' %}</p>
+            </div>
+            <div class="message-body">
+                <p>
+                    {% trans "If you are having trouble downloading your photos or don't know how to do it, please watch
+                    this video" %}
+                    <button class="button is-primary is-success is-rounded is-small">
+                        <span class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-player-play">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M7 4v16l13 -8z" />
+                            </svg>
+                        </span>
+                        <span>{% trans 'Play video' %}</span>
+                    </button>
+                </p>
+                <p>
+                    {% trans 'You can also contact us by Whatsapp' %}
+                    {% include 'partials/_whatsapp-link.html' with button_class='is-success is-rounded is-small' %}
+                </p>
+            </div>
+        </article>
+    </div>
+</div>
+
+<div class="cta-container">
+    <button class="button is-primary is-rounded is-large is-responsive" onclick="downloadAllPhotos()">
+        {% trans 'Download all photos' %}
+    </button>
+</div>
+
+<div id="bulma-modal" class="modal">
+    <div class="modal-background"></div>
+
+    <div class="modal-content" id="photo-modal-content"></div>
+
+    <button class="modal-close is-large" aria-label="close"></button>
+</div>
+{% endblock content %}

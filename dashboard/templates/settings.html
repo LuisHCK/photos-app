@@ -1,0 +1,46 @@
+<!-- Extends base.html -->
+{% extends '_base.html' %}
+
+<!-- Translations -->
+{% load i18n %}
+
+<!-- Load static files -->
+{% load static %}
+
+<!-- Load crispy forms -->
+{% load crispy_forms_tags %}
+
+<!-- Title -->
+{% block title %} Memorias de Vida | {% trans 'Settings' %} {% endblock %}
+
+<!-- Styles -->
+
+<!-- Navbar -->
+{% block navbar %} {% include 'partials/_nav.html' %} {% endblock navbar %}
+
+<!-- Content -->
+{% block content %}
+<h1 class="title">
+    {% trans 'Settings' %} 
+</h1>
+
+<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+    <input name="next" type="hidden" value="{% url 'settings' %}"/>
+    <select class="select is-primary is-rounded" name="language">
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages %}
+        {% for language in languages %}
+            <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                {{ language.name_local }} ({{ language.code }})
+            </option>
+        {% endfor %}
+    </select>
+    <input class="button is-primary is-rounded" type="submit" value="{% trans 'Save' %}"/>
+</form>
+
+<h3 class="title">{% trans 'Translations' %}</h3>
+<a href="/rosetta/" class="button is-primary is-rounded">
+    {% trans 'Translate' %}
+</a>
+{% endblock content %}

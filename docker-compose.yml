@@ -1,0 +1,23 @@
+services:
+    photos:
+        build: .
+        command: python manage.py runserver 0.0.0.0:8000
+        ports:
+            - 8000:8000
+        volumes:
+            - .:/opt/app
+            - ./uploads:/opt/app/uploads
+        env_file:
+            - .env
+        restart: always
+        depends_on:
+            - database
+    database:
+        image: postgres:15-alpine
+        env_file:
+            - .env
+        volumes:
+            - postgresdb:/var/lib/postgresql/data
+
+volumes:
+    postgresdb:

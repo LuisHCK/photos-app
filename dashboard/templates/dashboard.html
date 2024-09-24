@@ -1,0 +1,57 @@
+<!-- Extends base.html -->
+{% extends '_base.html' %}
+
+<!-- Load static files -->
+{% load static %}
+
+<!-- load translations -->
+{% load i18n %}
+
+<!-- Load scripts -->
+{% block head %}
+<script src="{% static 'js/dashboard.js' %}"></script>
+{% endblock head %}
+
+<!-- Title -->
+{% block title %} Memorias de Vida | {% trans 'Sessions' %} {% endblock %}
+<!-- Navbar -->
+
+{% block navbar %} {% include 'partials/_nav.html' %} {% endblock navbar %}
+
+<!-- Content -->
+{% block content %}
+<div class="mb-6">
+    <h1 class="title is-size-1-desktop is-size-3-tablet is-size-4-mobile is-brand-dark">
+        {% trans 'Dashboard' %}
+    </h1>
+
+    <a href="{% url 'session_create' %}" class="button is-primary is-rounded is-small">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        <span> {% trans 'Create new session' %} </span>
+    </a>
+</div>
+
+{% include 'partials/_stats.html' with sessions=sessions total_customers=total_customers total_photos=total_photos %}
+
+<section class="mt-6 pb-4">
+    <h2 class="title is-size-2-desktop is-size-3-tablet is-size-5-mobile is-brand-dark">
+        {% trans 'Sessions' %}
+    </h2>
+
+    <div class="fixed-grid has-3-cols-desktop has-2-cols-tablet has-1-cols-mobile">
+        <div class="grid">
+            {% for session in sessions %}
+            <!-- Session Card -->
+            <div class="cell">{% include '_session-card.html' with session=session %}</div>
+            <!-- End Session Card -->
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

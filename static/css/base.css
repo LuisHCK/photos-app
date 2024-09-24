@@ -1,0 +1,35 @@
+:root {
+    --bulma-primary-h: 30deg;
+    --bulma-primary-s: 38%;
+    --bulma-primary-l: 68%;
+    --bulma-link-h: 341deg;
+    --bulma-link-s: 38%;
+    --bulma-link-l: 79%;
+}
+
+body {
+    height: 100vh;
+    min-height: 100vh;
+}
+
+main {
+    height: 100%;
+    padding: 0 1rem;
+
+    @media screen and (min-width: 768px) {
+        padding: 0;
+    }
+}
+
+.dashboard-icon {
+    width: 64px;
+    height: 64px;
+}
+
+.is-brand-dark {
+    color: #53412b;
+}
+
+.image-cover {
+    object-fit: cover;
+}

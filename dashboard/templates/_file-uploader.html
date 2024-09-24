@@ -1,0 +1,31 @@
+<!-- Load translations -->
+{% load i18n %}
+
+<!-- File uploader -->
+<div class="file-uploader mb-4">
+    <label for="photos">
+        <div class="file-uploader-button">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="64"
+                height="64"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-cloud-upload"
+            >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M7 18a4.6 4.4 0 0 1 0 -9a5 4.5 0 0 1 11 2h1a3.5 3.5 0 0 1 0 7h-1" />
+                <path d="M9 15l3 -3l3 3" />
+                <path d="M12 12l0 9" />
+            </svg>
+            <span class="file-uploader-text"> {% trans 'Select photos' %} </span>
+        </div>
+    </label>
+    <div id="file-uploader-preview"></div>
+    <input type="file" name="photos" id="photos" accept="image/jpeg,image/jpg,image/png" multiple hidden />
+</div>
+<!-- End file uploader -->

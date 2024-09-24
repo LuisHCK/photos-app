@@ -1,0 +1,81 @@
+{% load i18n %}
+
+<div class="card">
+    <div class="card-content">
+        <div class="content">
+            <h5 class="title is-size-5-desktop is-size-6-mobile">
+                {% trans 'Session' %} #{{ session.id }}
+            </h5>
+
+            <div class="grid">
+                <div class="cell">
+                    <p class="has-text-weight-semibold">
+                        {% trans 'Customer' %}
+                    </p>
+                    {{ session.customer }}
+                </div>
+                <div class="cell">
+                    <p class="has-text-weight-semibold">
+                        {% trans 'Date' %}
+                    </p>
+                    {{ session.created_at|date:"d/M/Y" }}
+                </div>
+                <div class="cell">
+                    <p class="has-text-weight-semibold mb-0">
+                        {% trans 'Photos' %}
+                    </p>
+                    <div class="tag is-secondary is-rounded">
+                        {{ session.count_photos }}
+                    </div>
+
+                </div>
+                <div class="cell">
+                    <p class="has-text-weight-semibold mb-0">
+                        {% trans 'Download count' %}
+                    </p>
+                    <span class="tag is-info is-rounded">
+                        {{ session.download_count }}
+                    </span>
+                </div>
+                <div class="cell">
+                    <p class="has-text-weight-semibold">
+                        {% trans 'Expiration' %}
+                    </p>
+                    {{ session.expires_at|date:"d/M/Y h:i a" }}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="card-footer">
+        <a href="{% url 'session_edit' session.id %}" class="card-footer-item">
+            {% trans 'Edit' %}
+        </a>
+        <a href="{% url 'public_session_details' session.access_slug %}" class="card-footer-item">
+            {% trans 'View' %}
+        </a>
+        <div class="dropdown card-footer-item">
+            <a class="dropdown-trigger" aria-haspopup="true" aria-controls="dropdown-menu-{{session.id}}">
+                {% trans 'Share' %}
+            </a>
+            <div class="dropdown-menu" id="dropdown-menu-{{session.id}}" role="menu">
+                <div class="dropdown-content">
+                    <button class="dropdown-item" data-url="{% url 'public_session_details' session.access_slug %}"
+                        data-success="{% trans 'Link copied to clipboard' %}"
+                        data-error="{% trans 'Error copying link to clipboard. Verify the site permissions.' %}"
+                        onclick="copyLink(event)">
+                        {% trans 'Copy link to clipboard' %}
+                    </button>
+                    <button class="dropdown-item" data-url="{% url 'public_session_details' session.access_slug %}"
+                        data-error="{% trans 'Error sharing link. Your browser does not support the share API.' %}"
+                        data-tile="{% trans 'Your photoshoot is ready!' %}"
+                        data-text="{% trans 'You can download your photoshoot using this link:' %}"
+                        data-url="{% url 'public_session_details' session.access_slug %}"
+                        onclick="webShare(event)">
+                        {% trans 'Select app' %}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

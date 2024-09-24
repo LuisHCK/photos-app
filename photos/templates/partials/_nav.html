@@ -1,0 +1,50 @@
+{% load static %} {% load i18n %}
+<nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a
+            class="navbar-item"
+            href="{% if user.is_authenticated %} {% url 'dashboard' %} {% endif %}"
+        >
+            <img src="{% static 'img/logo.png' %}" alt="Memorias de vida logo" height="100" />
+        </a>
+
+        <a
+            role="button"
+            class="navbar-burger"
+            aria-label="menu"
+            aria-expanded="false"
+            data-target="navbarBasicExample"
+        >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+        {% if user.is_authenticated %}
+        <div class="navbar-start">
+            <a href="{% url 'dashboard' %}" class="navbar-item">{% trans 'Dashboard' %}</a>
+            <a href="{% url 'settings' %}" class="navbar-item">{% trans 'Settings' %}</a>
+        </div>
+        {% endif %}
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    {% if user.is_authenticated %} {% trans 'Hi'%} {{ user.username }}!
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button class="button is-warning is-rounded" type="submit">
+                            {% trans 'Log Out' %}
+                        </button>
+                    </form>
+                    {% else %}
+                    {% include 'partials/_whatsapp-link.html' %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
