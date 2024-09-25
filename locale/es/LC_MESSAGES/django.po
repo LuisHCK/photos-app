@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 18:29+0000\n"
-"PO-Revision-Date: 2024-09-25 18:37+0000\n"
+"POT-Creation-Date: 2024-09-25 22:48+0000\n"
+"PO-Revision-Date: 2024-09-25 22:50+0000\n"
 "Last-Translator:   <luisjcenteno17@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -33,6 +33,27 @@ msgstr "Creado en"
 
 msgid "Updated at"
 msgstr "Actualizado en"
+
+msgid "Key"
+msgstr "Clave"
+
+msgid "Value"
+msgstr "Valor"
+
+msgid "Description"
+msgstr "Descripción"
+
+msgid "Config type"
+msgstr "Tipo de valor"
+
+#, fuzzy
+#| msgid "Active"
+msgid "Is active"
+msgstr "Activo"
+
+#| msgid "Settings"
+msgid "App settings"
+msgstr "Ajustes del sistema"
 
 msgid "Select photos"
 msgstr "Seleccionar fotos"
@@ -120,7 +141,6 @@ msgstr "Traducciones"
 msgid "Translate"
 msgstr "Traducir"
 
-#| msgid "Actions"
 msgid "Active"
 msgstr "Activo"
 
@@ -176,6 +196,18 @@ msgstr "También puedes ponerte en contacto con nosotros por Whatsapp"
 
 msgid "Download all photos"
 msgstr "Descargar todas las fotos"
+
+msgid "Session unavailable"
+msgstr "La sesión no esta disponible"
+
+msgid ""
+"This session is no longer available. Please contact us if you need help."
+msgstr ""
+"La sesión ya no esta disponible. Por favor ponte en contacto con nosotros si"
+" necesitas ayuda."
+
+msgid "Return to homepage"
+msgstr "Regresar a la pagina de inicio"
 
 msgid "Spanish"
 msgstr "Español"

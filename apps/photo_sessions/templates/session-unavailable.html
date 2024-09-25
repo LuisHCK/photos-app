@@ -2,13 +2,31 @@
 {% load custom_tags %}
 {% load i18n %}
 
+<!-- Styles -->
+{% block head %}
+<style>
+    body {
+        background: radial-gradient(#f1f1f1 15%, transparent 16%), linear-gradient(45deg, transparent 49%, #f1f1f1 49% 51%, transparent 51%), linear-gradient(-45deg, transparent 49%, #f1f1f1 49% 51%, transparent 51%);
+        background-size: 3em 3em;
+        background-color: #ffffff;
+        opacity: 1
+    }
+</style>
+{% endblock head %}
+
 <!-- title -->
-{% block title %} {% sitename %} | {{ trans 'Session unavailable' %} {% endblock %}
+{% block title %} {% sitename %} | {% trans 'Session unavailable' %} {% endblock %}
 
 {% block content %}
-<h1 class="title">{% trans 'Session unavailable' %}</h1>
-<p class="mb-3 mt-0 notification is-danger">
-    {% trans 'This session is no longer available. Please contact us if you need help.' %}
-    <a href="/">{% trans 'Return to homepage' %}</a>
-</p>
+<div class="center-content">
+    <section class="hero is-danger is-rounded">
+        <div class="hero-body">
+            <p class="title">{% trans 'Session unavailable' %}</p>
+            <p class="subtitle">
+                {% trans 'This session is no longer available. Please contact us if you need help.' %}
+            </p>
+            <a class="button is-link" href="/">{% trans 'Return to homepage' %}</a>
+        </div>
+    </section>
+</div>
 {% endblock content %}

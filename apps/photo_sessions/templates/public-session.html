@@ -48,7 +48,7 @@
         {% for photo in photos %}
         <div class="image-container">
             <button class="js-modal-trigger" data-target="bulma-modal" data-url="{{ photo.thumbnail.url }}"
-                onclick="openModal(event)">
+                onclick="openPreview(event)">
                 <img src="{{ photo.thumbnail.url }}"
                     alt="{% trans 'Session' %}#{{ session.id }} - {% trans 'Photo' %}#{{ photo.id }}" />
             </button>
