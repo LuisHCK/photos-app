@@ -1,0 +1,24 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load custom_tags %}
+
+{% block title %} {% sitename %} {% endblock %}
+
+{% block content %}
+<div class="center-content">
+    <section class="hero is-primary is-bold is-rounded">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    {% trans 'Welcome to ' %} {% sitename %}
+                </h1>
+                <h2 class="subtitle">
+                    {% trans 'Photos is a photo sharing platform that allows you to share your photos with your friends and family.' %}
+                </h2>
+                <a class="button is-link" href="{% url 'dashboard' %}">{% trans 'Start now' %}</a>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock content %}

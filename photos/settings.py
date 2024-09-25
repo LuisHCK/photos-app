@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'crispy_bulma',
     'rosetta',
     # Project apps
+    'apps.homepage',
     'apps.photo_sessions',
     'apps.customers',
     'apps.dashboard'
