@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load custom_tags %}
 
 <div class="card">
     <div class="card-content">
@@ -6,6 +7,10 @@
             <h5 class="title is-size-5-desktop is-size-6-mobile">
                 {% trans 'Session' %} #{{ session.id }}
             </h5>
+
+            <div class="is-top-right tag is-rounded {{ session.status|get_status_class_name }}">
+                {{session.get_status_display}}
+            </div>
 
             <div class="grid">
                 <div class="cell">
@@ -37,11 +42,11 @@
                         {{ session.download_count }}
                     </span>
                 </div>
-                <div class="cell">
+                <div class="cell is-col-span-2">
                     <p class="has-text-weight-semibold">
                         {% trans 'Expiration' %}
                     </p>
-                    {{ session.expires_at|date:"d/M/Y h:i a" }}
+                    {{ session.expires_at|date:"D d M Y h:i a" }}
 
                 </div>
             </div>
@@ -70,8 +75,7 @@
                         data-error="{% trans 'Error sharing link. Your browser does not support the share API.' %}"
                         data-tile="{% trans 'Your photoshoot is ready!' %}"
                         data-text="{% trans 'You can download your photoshoot using this link:' %}"
-                        data-url="{% url 'public_session_details' session.access_slug %}"
-                        onclick="webShare(event)">
+                        data-url="{% url 'public_session_details' session.access_slug %}" onclick="webShare(event)">
                         {% trans 'Select app' %}
                     </button>
                 </div>

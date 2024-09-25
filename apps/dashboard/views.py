@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from apps.photo_sessions.models import Session, Photo
 from apps.photo_sessions.forms import SessionForm
 from apps.customers.models import Customer
+from apps.photo_sessions.tasks import delete_photos
 
 
 class DashboardPageView(LoginRequiredMixin, TemplateView):
@@ -62,7 +63,15 @@ class SessionCreateView(LoginRequiredMixin, FormView):
         for photo in photos:
             Photo.objects.create(session=session, image=photo)
 
+        # Schedule the deletion of the photos
+        self._schedule_delete_photos(
+            session.id, expiration_date=session.expires_at())
+
         return redirect('session_edit', session.id)
+
+    def _schedule_delete_photos(self, session_id, expiration_date):
+        id = str(session_id)
+        delete_photos.apply_async(args=[id], eta=expiration_date)
 
 
 class SettingsPageView(LoginRequiredMixin, TemplateView):

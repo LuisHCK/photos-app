@@ -18,6 +18,11 @@ services:
             - .env
         volumes:
             - postgresdb:/var/lib/postgresql/data
-
+        restart: always
+    redis:
+        image: redis:alpine
+        restart: always
+        expose:
+            - 6379
 volumes:
     postgresdb:

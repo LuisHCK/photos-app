@@ -26,7 +26,7 @@ class SessionForm(forms.ModelForm):
 
     class Meta:
         model = Session
-        fields = ['customer', 'valid_days', 'photos']
+        fields = ['customer', 'valid_days', 'photos', 'status']
 
 
 class PhotoForm(forms.ModelForm):

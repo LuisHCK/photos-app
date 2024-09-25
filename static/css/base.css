@@ -33,3 +33,9 @@ main {
 .image-cover {
     object-fit: cover;
 }
+
+.is-top-right {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}

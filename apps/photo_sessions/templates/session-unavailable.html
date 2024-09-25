@@ -1,0 +1,14 @@
+{% extends '_base.html' %}
+{% load custom_tags %}
+{% load i18n %}
+
+<!-- title -->
+{% block title %} {% sitename %} | {{ trans 'Session unavailable' %} {% endblock %}
+
+{% block content %}
+<h1 class="title">{% trans 'Session unavailable' %}</h1>
+<p class="mb-3 mt-0 notification is-danger">
+    {% trans 'This session is no longer available. Please contact us if you need help.' %}
+    <a href="/">{% trans 'Return to homepage' %}</a>
+</p>
+{% endblock content %}

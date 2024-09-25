@@ -88,11 +88,13 @@
     </div>
 </div>
 
+{% if photos.count > 0 %}
 <div class="cta-container">
     <button class="button is-primary is-rounded is-large is-responsive" onclick="downloadAllPhotos()">
         {% trans 'Download all photos' %}
     </button>
 </div>
+{% endif %}
 
 <div id="bulma-modal" class="modal">
     <div class="modal-background"></div>

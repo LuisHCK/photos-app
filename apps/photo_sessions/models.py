@@ -16,18 +16,27 @@ from utils.text import kebab
 # Allow compressing large images
 Image.MAX_IMAGE_PIXELS = 1000000000
 
+PHOTOSHOOT_STATUS = (
+    ('active', _('Active')),
+    ('expired', _('Expired')),
+    ('deleted', _('Deleted')),
+)
+
 
 class Session(models.Model):
-    customer = models.ForeignKey(
-        Customer, on_delete=models.RESTRICT, verbose_name=_('Customer'))
-    user = models.ForeignKey(User, verbose_name=_(
-        "User"), on_delete=models.CASCADE)
+    customer = models.ForeignKey(Customer, on_delete=models.RESTRICT,
+                                 verbose_name=_('Customer'))
+    user = models.ForeignKey(User, verbose_name=_("User"),
+                             on_delete=models.CASCADE)
 
-    access_slug = models.CharField(
-        max_length=255, null=True, blank=True, unique=True, verbose_name=_("Access slug"))
+    access_slug = models.CharField(max_length=255, null=True, blank=True,
+                                   unique=True, verbose_name=_("Access slug"))
     valid_days = models.IntegerField(default=15, verbose_name=_("Valid days"))
-    download_count = models.IntegerField(
-        default=0, verbose_name=_('Download count'))
+    download_count = models.IntegerField(default=0,
+                                         verbose_name=_('Download count'))
+    status = models.CharField(max_length=32,
+                              choices=PHOTOSHOOT_STATUS,
+                              default='active', verbose_name=_("Status"))
 
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_("Created at"))
@@ -75,8 +84,23 @@ class Photo(models.Model):
             self.thumbnail = compress(self.image)
         super(Photo, self).save(*args, **kwargs)
 
+    def clean_photos(self):
+        """
+        Deletes file from filesystem to free up space
+        """
+        if self.image:
+            if os.path.isfile(self.image.path):
+                os.remove(self.image.path)
 
-def compress(image):
+        if self.thumbnail:
+            if os.path.isfile(self.thumbnail.path):
+                os.remove(self.thumbnail.path)
+
+
+def compress(image: File) -> File:
+    """
+    Compress and optimize image
+    """
     temp_img = Image.open(image)
     temp_io = BytesIO()
     max_width = 10000
