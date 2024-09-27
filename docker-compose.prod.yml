@@ -30,3 +30,6 @@ services:
         restart: always
         expose:
             - 6379
+
+volumes:
+    postgresdb:
