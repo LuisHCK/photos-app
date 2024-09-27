@@ -3,7 +3,10 @@ services:
         build:
             context: .
             dockerfile: Dockerfile.prod
-        command: python manage.py migrate && gunicorn photos.wsgi:application -b :8000 --reload --access-logfile - --error-logfile -
+        command: >
+            sh -c "python manage.py migrate &&
+                   python manage.py collectstatic --no-input &&
+                   gunicorn photos.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 300"
         ports:
             - 8000
         volumes:
@@ -27,9 +30,3 @@ services:
         restart: always
         expose:
             - 6379
-    nginx:
-        build: ./nginx
-        ports:
-            - 1337:80
-        depends_on:
-            - photos
