@@ -3,7 +3,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile.prod
-        command: gunicorn photos.wsgi:application -b :8000 --reload --access-logfile - --error-logfile -
+        command: python manage.py migrate && gunicorn photos.wsgi:application -b :8000 --reload --access-logfile - --error-logfile -
         ports:
             - 8000
         volumes:
