@@ -30,4 +30,8 @@ urlpatterns = [
     path('sessions/', include('apps.photo_sessions.urls')),
     re_path(r'^rosetta/', include('rosetta.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
