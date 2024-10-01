@@ -3,24 +3,72 @@
 {% load i18n %}
 {% load custom_tags %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+<script src="{% static 'js/homepage.js' %}"></script>
+{% endblock %}
+
 {% block title %} {% sitename %} {% endblock %}
 
 {% block navbar %} {% include 'partials/_nav.html' %} {% endblock navbar %}
 
 {% block content %}
-<div class="center-content">
-    <section class="hero is-primary is-bold is-rounded">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title">
-                    {% trans 'Welcome to ' %} {% sitename %}
-                </h1>
-                <h2 class="subtitle">
-                    {% trans 'Photos is a photo sharing platform that allows you to share your photos with your friends and family.' %}
-                </h2>
-                <a class="button is-link" href="{% url 'dashboard' %}">{% trans 'Start now' %}</a>
+<button class="button is-secondary is-rounded back-to-top" id="back-to-top">
+    <span class="icon is-small">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-up">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M12 5l0 14" />
+            <path d="M18 11l-6 -6" />
+            <path d="M6 11l6 -6" />
+        </svg>
+    </span>
+    <span>
+        {% trans 'Back to top' %}
+    </span>
+</button>
+
+<section class="hero-container">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title is-size-1-desktop is-size-2-tablet is-size-3-mobile has-text-white">
+                {% trans 'Welcome to Memorias de Vida' %}
+            </h1>
+            <h2 class="subtitle">{% trans 'A place to share your memories' %}</h2>
+            <div class="buttons">
+
             </div>
         </div>
-    </section>
-</div>
+
+        <button class="scroll-to-content bounce" onclick="scrollToSecion('about')"
+            aria-label="{% trans 'Scroll to About' %}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-down">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M12 5l0 14" />
+                <path d="M18 13l-6 6" />
+                <path d="M6 13l6 6" />
+            </svg>
+        </button>
+</section>
+
+<section class="secondary-section" id="about">
+    <div class="section-panel">
+        <p class="subtitle">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id aliquet quam, vel condimentum
+            orci.
+        </p>
+        <p class="subtitle">
+            Nunc consectetur blandit eros quis fermentum. Aliquam posuere rutrum quam a viverra. Class aptent taciti
+            sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis in sagittis massa, non
+            pulvinar
+            dui
+        </p>
+
+        <img src="{% static 'img/logo-secondary.png' %}" alt="{% sitename %} logo" />
+    </div>
+    <div class="section-panel image-container"></div>
+</section>
 {% endblock content %}

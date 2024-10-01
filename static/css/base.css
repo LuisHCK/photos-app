@@ -5,6 +5,8 @@
     --bulma-link-h: 341deg;
     --bulma-link-s: 38%;
     --bulma-link-l: 79%;
+    --secondary-color: #ccad8e;
+    --light-color: #fff5ee;
 }
 
 body {
