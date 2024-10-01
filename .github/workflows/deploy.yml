@@ -18,11 +18,8 @@ jobs:
                   password: ${{ secrets.PASSWORD }}
                   port: ${{ secrets.PORT }}
                   script_stop: true
+                  request_pty: true
                   script: |
                       TERM=xterm
-                      echo "==================== Deployment started ====================" &&
                       cd ${{ secrets.PROJECT_PATH }} &&
-                      git fetch --all &&
-                      git reset --hard origin/main &&
-                      sh docker/deploy.sh &&
-                      echo "==================== Deployment completed ===================="
+                      ./docker/deploy.sh &&

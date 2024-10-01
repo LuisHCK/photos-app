@@ -1,7 +1,6 @@
 #!/bin/bash
 
-bold=$(tput bold)
-normal=$(tput sgr0)
+echo "🚀 Starting deployment..."
 
 # Name of the service to restart (e.g., service name in the docker-compose file)
 SERVICE_NAME="photos"
@@ -15,8 +14,12 @@ CONTAINER_IDS=$(docker compose -f $COMPOSE_FILE ps -q $SERVICE_NAME)
 
 TOTAL_CONTAINERS=$(echo "$CONTAINER_IDS" | wc -w)
 
+# Git pull and reset to the main branch
+git fetch --all
+git reset --hard origin/main
+
 if [ -z "$CONTAINER_IDS" ]; then
-    echo "No containers found for the service '$SERVICE_NAME'. Starting the service."
+    echo "⚠️ No containers found for the service '$SERVICE_NAME'. Starting the service."
     docker compose -f $COMPOSE_FILE up -d
     exit 0
 fi
@@ -28,21 +31,23 @@ for CONTAINER_ID in $CONTAINER_IDS; do
     INDEX=$((INDEX + 1))
 
     # Restart the container
-    echo "${bold}Restarting container $CONTAINER_ID...${normal}"
+    echo "🔄 Restarting container $CONTAINER_ID..."
     docker stop $CONTAINER_ID
     docker start $CONTAINER_ID
 
     # Check if the current container is the last one
     if [ $INDEX -eq $TOTAL_CONTAINERS ]; then
-        echo "${bold}All containers for the service '$SERVICE_NAME' have been restarted.${normal}"
+        echo "✅ All containers for the service '$SERVICE_NAME' have been restarted."
         exit 0
     fi
 
-    echo "${bold}Container $CONTAINER_ID has been restarted.${normal}"
-    echo "${bold}Waiting for $RESTART_DELAY before restarting the next container...${normal}"
+    echo "✅ Container $CONTAINER_ID has been restarted."
+    echo "⏳ Waiting for $RESTART_DELAY before restarting the next container..."
 
     # Wait for the specified delay before restarting the next container
     sleep $RESTART_DELAY
 done
 
-echo "${bold}All containers for the service '$SERVICE_NAME' have been restarted.${normal}"
+echo "✅ All containers for the service '$SERVICE_NAME' have been restarted."
+
+echo "🚀 Deployment completed."
