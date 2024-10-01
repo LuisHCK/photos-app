@@ -1,0 +1,20 @@
+server {
+    listen 80;
+    client_max_body_size 4G;
+
+    server_name ${DOMAIN};
+
+    keepalive_timeout 5;
+
+    location /static {
+        # checks for static file
+        alias /home/app/photos/collected_static;
+        add_header Cache-Control "public";
+    }
+
+    location /uploads {
+        # checks for static file
+        alias /home/app/photos/uploads;
+        add_header Cache-Control "public";
+    }
+  }

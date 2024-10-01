@@ -1,0 +1,25 @@
+name: Deploy to Production
+on:
+    push:
+        tags:
+            - '*'
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Deploy to Production
+              uses: appleboy/ssh-action@1.0.3
+              with:
+                  host: ${{ secrets.HOST }}
+                  username: ${{ secrets.USERNAME }}
+                  password: ${{ secrets.PASSWORD }}
+                  port: ${{ secrets.PORT }}
+                  script_stop: true
+                  script: |
+                      echo "=============================== Deployment started ===============================" &&
+                      cd {{secrets.PROJECT_PATH}} &&
+                      git fetch --all &&
+                      git reset --hard origin/main &&
+                      sh docker/deploy.sh &&
+                      echo "=============================== Deployment completed ==============================="
