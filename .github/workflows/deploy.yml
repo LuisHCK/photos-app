@@ -22,4 +22,7 @@ jobs:
                   script: |
                       TERM=xterm
                       cd ${{ secrets.PROJECT_PATH }} &&
-                      ./docker/deploy.sh &&
+                      git fetch --all &&
+                      git reset --hard origin/main &&
+                      git pull &&
+                      ./docker/deploy.sh

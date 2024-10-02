@@ -30,15 +30,18 @@
 </button>
 
 <section class="hero-container">
+    <video class="hero-video-player" poster="{% static 'img/1-thumb.jpg' %}" autoplay muted loop>
+        <source src="{% static 'videos/hero-video.mp4' %}" type="video/mp4" />
+        {% trans 'Your browser does not support the video tag.' %}
+    </video>
     <div class="hero-body">
         <div class="container">
-            <h1 class="title is-size-1-desktop is-size-2-tablet is-size-3-mobile has-text-white">
-                {% trans 'Welcome to Memorias de Vida' %}
+            <h1 class="page-title title is-hidden">
+                {% trans 'Welcome' %}
             </h1>
-            <h2 class="subtitle">{% trans 'A place to share your memories' %}</h2>
-            <div class="buttons">
 
-            </div>
+            <img class="hero-logo" src="{% static 'img/logo-primary-large.png' %}" alt="{% sitename %} logo" />
+            <h2 class="subtitle has-text-primary mt-6">{% trans 'A place to share your memories' %}</h2>
         </div>
 
         <button class="scroll-to-content bounce" onclick="scrollToSecion('about')"

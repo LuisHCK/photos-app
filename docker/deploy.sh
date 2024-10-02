@@ -14,10 +14,6 @@ CONTAINER_IDS=$(docker compose -f $COMPOSE_FILE ps -q $SERVICE_NAME)
 
 TOTAL_CONTAINERS=$(echo "$CONTAINER_IDS" | wc -w)
 
-# Git pull and reset to the main branch
-git fetch --all
-git reset --hard origin/main
-
 if [ -z "$CONTAINER_IDS" ]; then
     echo "⚠️ No containers found for the service '$SERVICE_NAME'. Starting the service."
     docker compose -f $COMPOSE_FILE up -d
