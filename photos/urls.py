@@ -28,6 +28,7 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path('dashboard/', include('apps.dashboard.urls')),
     path('sessions/', include('apps.photo_sessions.urls')),
+    path('customers/', include('apps.customers.urls')),
     re_path(r'^rosetta/', include('rosetta.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
 ]

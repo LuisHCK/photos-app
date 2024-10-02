@@ -1,0 +1,89 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load custom_tags %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/customers.css' %}">
+{% endblock %}
+
+{% block title %} {% sitename %} | {% trans 'Customers' %} {% endblock %}
+
+{% block navbar %} {% include 'partials/_nav.html' %} {% endblock navbar %}
+
+
+<!-- Content -->
+{% block content %}
+<div>
+    <div class="mb-6">
+        <h1 class="title size-is-1-desktop size-is-2-tablet size-is-3-mobile">
+            {% trans 'Customers' %}
+        </h1>
+        <a href="{% url 'customers:create_customer' %}" class="button is-primary is-rounded is-small">
+            <span class="icon is-small">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+            </span>
+            <span>
+                {% trans 'Create new customer' %}
+            </span>
+        </a>
+    </div>
+
+    <div class="fixed-grid has-3-cols-desktop has-2-cols-tablet has-1-cols-mobile">
+        <div class="grid">
+            {% for customer in customers %}
+            <div class="col">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-48x48">
+                                    <svg class="customer-avatar" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-user-square-rounded">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M12 13a3 3 0 1 0 0 -6a3 3 0 0 0 0 6z" />
+                                        <path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" />
+                                        <path d="M6 20.05v-.05a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v.05" />
+                                    </svg>
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <p class="title is-4">{{customer.name}}</p>
+                                <p class="subtitle is-6 mt-1">
+                                    📞
+                                    <a href="tel:+{{customer.phone}}">{{customer.phone}}</a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="content">
+                            <strong>
+                                {% trans 'Total sessions:' %}
+                            </strong>
+                            <div class="tag is-success is-rounded">
+                                {{ customer.total_sessions }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer class="card-footer">
+                        <a href="{% url 'customers:edit_customer' customer.id %}" class="card-footer-item">
+                            {% trans 'Edit' %}
+                        </a>
+                    </footer>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    </section>
+    {% endblock content %}
+    <!-- End Content -->

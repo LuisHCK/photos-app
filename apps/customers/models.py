@@ -14,3 +14,6 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.name
+
+    def total_sessions(self):
+        return self.session_set.count()
