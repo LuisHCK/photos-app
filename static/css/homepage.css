@@ -7,6 +7,7 @@ main.container {
 .hero-container {
     width: 100%;
     height: calc(100vh - 52px);
+    padding: 1rem;
     padding-bottom: 52px;
     position: relative;
 
@@ -119,9 +120,14 @@ main.container {
 .back-to-top {
     display: none;
     position: fixed;
-    right: 2rem;
-    bottom: 2rem;
+    right: 1rem;
+    bottom: 1rem;
     z-index: 39;
+
+    @media screen and (min-width: 768px) {
+        right: 2rem;
+        bottom: 2rem;
+    }
 }
 
 .bounce {

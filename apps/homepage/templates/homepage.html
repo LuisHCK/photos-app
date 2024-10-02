@@ -29,8 +29,9 @@
     </span>
 </button>
 
-<section class="hero-container">
-    <video class="hero-video-player" poster="{% static 'img/1-thumb.jpg' %}" autoplay muted loop>
+<section class="hero-container" id="main-hero-section">
+    <video class="hero-video-player" poster="{% static 'videos/hero-video-thumb.jpg' %}" id="hero-video-player" autoplay
+        muted loop>
         <source src="{% static 'videos/hero-video.mp4' %}" type="video/mp4" />
         {% trans 'Your browser does not support the video tag.' %}
     </video>
@@ -74,4 +75,19 @@
     </div>
     <div class="section-panel image-container"></div>
 </section>
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>
+            <strong>
+                © {% sitename %} - {% now "Y" %} | {% trans 'All rights reserved' %}
+            </strong>
+            <br>
+            {% trans 'Unauthorized use, reproduction, or distribution of any images on this site is prohibited. For licensing or inquiries' %},
+            <a href="#">
+                {% trans 'please contact us.' %}
+            </a>
+        </p>
+    </div>
+</footer>
 {% endblock content %}
