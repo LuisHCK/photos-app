@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-25 22:48+0000\n"
-"PO-Revision-Date: 2024-09-25 22:50+0000\n"
+"POT-Creation-Date: 2024-10-03 23:19+0000\n"
+"PO-Revision-Date: 2024-10-03 23:24+0000\n"
 "Last-Translator:   <luisjcenteno17@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -34,6 +34,31 @@ msgstr "Creado en"
 msgid "Updated at"
 msgstr "Actualizado en"
 
+#| msgid "Customer"
+msgid "Create customer"
+msgstr "Registrar cliente"
+
+#| msgid "Customer"
+msgid "Edit customer"
+msgstr "Editar cliente"
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Customers"
+msgstr "Clientes"
+
+#| msgid "Create new session"
+msgid "Create new customer"
+msgstr "Crear nuevo cliente"
+
+#| msgid "Edit session"
+msgid "Total sessions:"
+msgstr "Sesiones en total:"
+
+msgid "Edit"
+msgstr "Editar"
+
 msgid "Key"
 msgstr "Clave"
 
@@ -46,12 +71,10 @@ msgstr "Descripción"
 msgid "Config type"
 msgstr "Tipo de valor"
 
-#, fuzzy
 #| msgid "Active"
 msgid "Is active"
 msgstr "Activo"
 
-#| msgid "Settings"
 msgid "App settings"
 msgstr "Ajustes del sistema"
 
@@ -75,9 +98,6 @@ msgstr "Total de descargas"
 
 msgid "Expiration"
 msgstr "Expiración"
-
-msgid "Edit"
-msgstr "Editar"
 
 msgid "View"
 msgstr "Ver"
@@ -111,9 +131,6 @@ msgstr "Seleccionar aplicación "
 msgid "Sessions"
 msgstr "Sessiones"
 
-msgid "Customers"
-msgstr "Clientes"
-
 msgid "Dashboard"
 msgstr "Inicio"
 
@@ -129,9 +146,6 @@ msgstr "Estas seguro de eliminar esta foto?"
 msgid "Remove existing photos"
 msgstr "Borrar fotos subidas"
 
-msgid "Save"
-msgstr "Guardar"
-
 msgid "Settings"
 msgstr "Ajustes"
 
@@ -140,6 +154,73 @@ msgstr "Traducciones"
 
 msgid "Translate"
 msgstr "Traducir"
+
+msgid "File"
+msgstr "Archivo"
+
+msgid "Caption"
+msgstr "Subtitulo"
+
+msgid "Asset"
+msgstr "Recurso"
+
+msgid "Assets"
+msgstr "Recursos"
+
+msgid "Title"
+msgstr "Titulo"
+
+msgid "Slug"
+msgstr "Slug"
+
+msgid "Tags"
+msgstr "Etiqueta"
+
+msgid "Cover"
+msgstr "Portada"
+
+msgid "Published"
+msgstr "Publicado"
+
+msgid "Data"
+msgstr "Datos"
+
+#| msgid "Created at"
+msgid "Created by"
+msgstr "Creado por"
+
+msgid "Page"
+msgstr "Pagina"
+
+msgid "Pages"
+msgstr "Paginas"
+
+msgid "Back to top"
+msgstr "Regresar al inicio"
+
+#| msgid ""
+#| "Error sharing link. Your browser does not support the share API."
+msgid "Your browser does not support the video tag."
+msgstr "Tu navegador no soporta la reproducción de video"
+
+msgid "Welcome"
+msgstr "Bienvenido"
+
+msgid "Scroll to About"
+msgstr "Navegar a información "
+
+msgid "All rights reserved"
+msgstr "Todos los derechos reservados"
+
+msgid ""
+"Unauthorized use, reproduction, or distribution of any images on this site "
+"is prohibited. For licensing or inquiries"
+msgstr ""
+"Queda prohibido el uso, reproducción o distribución no autorizados de "
+"cualquiera de las imágenes de este sitio. Para licencias o consultas"
+
+msgid "please contact us."
+msgstr "por favor contacte con nosotros "
 
 msgid "Active"
 msgstr "Activo"
@@ -214,6 +295,18 @@ msgstr "Español"
 
 msgid "English"
 msgstr "Ingles"
+
+msgid "Homepage"
+msgstr "Pagina de inicio"
+
+msgid "Home"
+msgstr "Inicio"
+
+msgid "Pricing"
+msgstr "Paquetes"
+
+msgid "Schedule a photo session"
+msgstr "Agenda tu sesión "
 
 msgid "Log Out"
 msgstr "Cerrar sesión"
