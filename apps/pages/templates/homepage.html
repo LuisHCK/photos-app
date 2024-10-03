@@ -29,7 +29,7 @@
 </button>
 
 <section class="hero-container" id="main-hero-section">
-    <video class="hero-video-player" poster="{% static 'videos/hero-video-thumb.jpg' %}" id="hero-video-player"
+    <video class="hero-video-player" poster="{% static 'videos/hero-video-thumb.avif' %}" id="hero-video-player"
         preload="auto" autoplay muted loop>
         <source src="{% static 'videos/hero-video.mp4' %}" type="video/mp4" />
         {% trans 'Your browser does not support the video tag.' %}
@@ -40,7 +40,7 @@
                 {% trans 'Welcome' %}
             </h1>
 
-            <img class="hero-logo" src="{% static 'img/logo-primary-large.png' %}" alt="{% sitename %} logo" />
+            <img class="hero-logo" src="{% static 'img/logo-primary-large.avif' %}" alt="{% sitename %} logo" />
             <h2 class="subtitle has-text-primary mt-6">
             {{ page.data.headline }}
             </h2>
@@ -67,7 +67,7 @@
         </p>
         {% endfor %}
 
-        <img src="{% static 'img/logo-secondary.png' %}" alt="{% sitename %} logo" height="200" width="200" />
+        <img src="{% static 'img/logo-secondary.avif' %}" alt="{% sitename %} logo" height="200" width="200" />
     </div>
     <div class="section-panel image-container">
         <img src="{% static page.data.details_photo_cover %}" alt="{% sitename %} hero image" height="600" width="100%">
