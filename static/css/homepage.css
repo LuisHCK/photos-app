@@ -88,15 +88,18 @@ main.container {
 }
 
 .secondary-section .section-panel.image-container {
-    background-image: url('https://images.unsplash.com/photo-1615458508880-ec0521ce754f?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     display: none;
+    padding: 0;
 
     @media screen and (min-width: 768px) {
         display: block;
     }
+}
+
+.secondary-section .section-panel.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .scroll-to-content {

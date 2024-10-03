@@ -5,7 +5,6 @@
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
-<script src="{% static 'js/homepage.js' %}"></script>
 {% endblock %}
 
 {% block title %} {% sitename %} {% endblock %}
@@ -30,8 +29,8 @@
 </button>
 
 <section class="hero-container" id="main-hero-section">
-    <video class="hero-video-player" poster="{% static 'videos/hero-video-thumb.jpg' %}" id="hero-video-player" autoplay
-        muted loop>
+    <video class="hero-video-player" poster="{% static 'videos/hero-video-thumb.jpg' %}" id="hero-video-player"
+        preload="auto" autoplay muted loop>
         <source src="{% static 'videos/hero-video.mp4' %}" type="video/mp4" />
         {% trans 'Your browser does not support the video tag.' %}
     </video>
@@ -42,7 +41,9 @@
             </h1>
 
             <img class="hero-logo" src="{% static 'img/logo-primary-large.png' %}" alt="{% sitename %} logo" />
-            <h2 class="subtitle has-text-primary mt-6">{% trans 'A place to share your memories' %}</h2>
+            <h2 class="subtitle has-text-primary mt-6">
+            {{ page.data.headline }}
+            </h2>
         </div>
 
         <button class="scroll-to-content bounce" onclick="scrollToSecion('about')"
@@ -60,20 +61,17 @@
 
 <section class="secondary-section" id="about">
     <div class="section-panel">
+        {% for detail_value in page.data.details %}
         <p class="subtitle">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id aliquet quam, vel condimentum
-            orci.
+            {{ detail_value }}
         </p>
-        <p class="subtitle">
-            Nunc consectetur blandit eros quis fermentum. Aliquam posuere rutrum quam a viverra. Class aptent taciti
-            sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis in sagittis massa, non
-            pulvinar
-            dui
-        </p>
+        {% endfor %}
 
-        <img src="{% static 'img/logo-secondary.png' %}" alt="{% sitename %} logo" />
+        <img src="{% static 'img/logo-secondary.png' %}" alt="{% sitename %} logo" height="200" width="200" />
     </div>
-    <div class="section-panel image-container"></div>
+    <div class="section-panel image-container">
+        <img src="{% static page.data.details_photo_cover %}" alt="{% sitename %} hero image" height="600" width="100%">
+    </div>
 </section>
 
 <footer class="footer">
@@ -83,11 +81,14 @@
                 © {% sitename %} - {% now "Y" %} | {% trans 'All rights reserved' %}
             </strong>
             <br>
-            {% trans 'Unauthorized use, reproduction, or distribution of any images on this site is prohibited. For licensing or inquiries' %},
+            {% trans 'Unauthorized use, reproduction, or distribution of any images on this site is prohibited. For
+            licensing or inquiries' %},
             <a href="#">
                 {% trans 'please contact us.' %}
             </a>
         </p>
     </div>
 </footer>
+
+<script async src="{% static 'js/homepage.js' %}"></script>
 {% endblock content %}

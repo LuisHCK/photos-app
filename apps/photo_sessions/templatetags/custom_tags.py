@@ -9,6 +9,21 @@ def sitename():
     return settings.SITE_NAME or 'My Site Name'
 
 
+@register.simple_tag
+def sitedescription():
+    return 'My Site Description'
+
+
+@register.simple_tag
+def sitekeywords():
+    return 'My Site Keywords'
+
+
+@register.simple_tag
+def siteauthor():
+    return 'My Site Author'
+
+
 @register.filter
 def get_status_class_name(status):
     if (status == 'active'):

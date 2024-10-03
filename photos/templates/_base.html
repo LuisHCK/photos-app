@@ -1,5 +1,5 @@
 {% load static %} {% load custom_tags %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="light">
     <head>
         <meta charset="UTF-8" />
@@ -14,9 +14,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="color-scheme" content="light" />
         <meta name="supported-color-schemes" content="light" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
         <title>{% block title %} {% sitename %} {% endblock %}</title>
-        <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+        <!-- Load bulma css -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.2/css/bulma.min.css"
+            integrity="sha512-RpeJZX3aH5oZN3U3JhE7Sd+HG8XQsqmP3clIbu4G28p668yNsRNj3zMASKe1ATjl/W80wuEtCx2dFA8xaebG5w=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link  rel="stylesheet" href="{% static 'css/base.css' %}" />
+
+        <!-- SEO -->
+        <meta name="title" content="{% sitename %}">
+        <meta name="description" content="{% sitedescription %}">
+        <meta name="keywords" content="{% sitekeywords %}">
+        <meta name="robots" content="index, follow">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="language" content="Spanish">
+        <meta name="revisit-after" content="15 days">
+        <meta name="author" content="{% siteauthor %}">
+
+
         <!-- Head -->
         {% block head %} {% endblock head %}
     </head>

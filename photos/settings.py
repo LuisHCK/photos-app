@@ -31,7 +31,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = (os.getenv('DEBUG', 'False') == 'True')
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
-CSRF_TRUSTED_ORIGINS = ['https://{}'.format(os.environ.get('DOMAIN', '')), 'http://{}'.format(os.environ.get('DOMAIN', ''))]
+CSRF_TRUSTED_ORIGINS = ['https://{}'.format(os.environ.get(
+    'DOMAIN', '')), 'http://{}'.format(os.environ.get('DOMAIN', ''))]
 
 
 # Application definition
@@ -51,7 +52,7 @@ INSTALLED_APPS = [
     'crispy_bulma',
     'rosetta',
     # Project apps
-    'apps.homepage',
+    'apps.pages',
     'apps.photo_sessions',
     'apps.customers',
     'apps.dashboard'
@@ -171,13 +172,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
-
 MEDIA_URL = '/uploads/'
 
 APPEND_SLASH = True
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = ("bulma",)
-
 CRISPY_TEMPLATE_PACK = "bulma"
 
 # Celery
@@ -193,3 +192,5 @@ CACHES = {
         "LOCATION": os.environ.get('CELERY_BROKER_URL'),
     }
 }
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
