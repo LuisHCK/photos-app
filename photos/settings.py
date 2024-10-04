@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'apps.pages',
     'apps.photo_sessions',
     'apps.customers',
-    'apps.dashboard'
+    'apps.dashboard',
+    'apps.packages',
 ]
 
 MIDDLEWARE = [

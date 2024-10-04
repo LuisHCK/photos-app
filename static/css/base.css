@@ -38,10 +38,17 @@ main {
     right: 1rem;
 }
 
+.is-relative {
+    position: relative;
+}
 
 .center-content {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
+}
+
+.gap-1 {
+    gap: 1rem;
 }
