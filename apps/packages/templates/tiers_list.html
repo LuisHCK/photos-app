@@ -1,0 +1,55 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load custom_tags %}
+
+{% block title %} {% sitename %} | {% trans 'Package Tiers' %} {% endblock %}
+
+{% block navbar %} {% include 'partials/_nav.html' %} {% endblock navbar %}
+
+{% block content %}
+<section class="section">
+    <div>
+        <h1 class="title">
+            {% trans 'Package Tiers' %}
+        </h1>
+        <a href="{% url 'create_tier' package.id %}" class="button is-primary is-rounded is-small">
+            {% trans 'Create a tier' %}
+        </a>
+    </div>
+
+    <div class="mt-6 fixed-grid has-3-cols-desktop has-2-cols-tablet has-1-cols-mobile">
+        <div class="grid">
+            {% for tier in tiers %}
+            <div class="cell">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4 is-flex is-justify-content-space-between">
+                                    {{ tier.name }}
+
+                                    {% if tier.display_on_homepage %}
+                                    <span class="tag is-small is-rounded is-success">
+                                        {% trans "Homepage" %}
+                                    </span>
+                                    {% endif %}
+                                </p>
+                                <p class="subtitle is-6">
+                                    {{ tier.description }}
+                                </p>
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <a href="{% url 'edit_tier' package.id tier.id %}" class="card-footer-item">
+                                {% trans 'Edit' %}
+                            </a>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock content %}

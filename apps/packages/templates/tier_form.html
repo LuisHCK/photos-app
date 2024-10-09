@@ -1,0 +1,40 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load i18n %}
+<!-- Load crispy forms -->
+{% load crispy_forms_tags %}
+
+{% block head %}
+<script>
+    function handleSubmit(event) {
+        event.preventDefault()
+        const formData = new FormData(event.target)
+
+        // set loading state
+        const submitButton = event.target.querySelector('button[type="submit"]')
+        submitButton.disabled = true
+        submitButton.classList.add('is-loading')
+
+        fetch('', {
+            method: 'post',
+            body: formData
+        }).finally(function () {
+            window.parent.postMessage('tierFormSubmitted', '*')
+            // remove loading state
+            submitButton.disabled = false
+            submitButton.classList.remove('is-loading')
+        })
+    }
+</script>
+{% endblock head %}
+
+{% block content %}
+<form method="post" onsubmit="handleSubmit(event)">
+    {% csrf_token %}
+    {% csrf_token %} {{ form|crispy }}
+
+    <button class="button is-primary is-fullwidth is-rounded" type="submit" id="submit">
+        {% translate "Save" %}
+    </button>
+</form>
+{% endblock %}

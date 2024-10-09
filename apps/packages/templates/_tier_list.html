@@ -1,0 +1,27 @@
+<div class="mb-4 mt-4" id="tier-list">
+    <div class="fixed-grid has-3-cols-desktop has-2-cols-tablet has-1-cols-mobile">
+        <div class="grid">
+            {% for tier in tiers %}
+            <div class="cell">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">{{tier.name}}</p>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            <p>{{tier.description}}</p>
+                            <p>{{tier.price}}</p>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a href="#" class="card-footer-item">Edit</a>
+                        <a href="{% url 'delete_tier' package.id tier.id %}" class="card-footer-item">
+                            Delete
+                        </a>
+                    </footer>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

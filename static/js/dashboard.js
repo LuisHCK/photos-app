@@ -8,6 +8,7 @@
 async function submitForm(event) {
     event.preventDefault()
     const formData = new FormData(event.target)
+    formData.append['source'] = 'dynamic-tier-form'
 
     $submitButton = event.target.querySelector('button[type="submit"]')
     $submitButton.disabled = true
