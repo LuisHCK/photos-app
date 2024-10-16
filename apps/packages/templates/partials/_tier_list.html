@@ -1,0 +1,46 @@
+{% load i18n %}
+
+<div class="mb-4 mt-4" id="tier-list">
+    <div class="fixed-grid has-3-cols-desktop has-2-cols-tablet has-1-cols-mobile">
+        <div class="grid">
+            {% for tier in tiers %}
+            <div class="cell">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">{{tier.name}}</p>
+                    </header>
+                    <div class="card-content">
+                        <div class="content">
+                            <p>
+                                <b>
+                                    {% trans 'Description' %}:
+                                </b>
+                                {{tier.description}}
+                            </p>
+                            <p>
+                                <b>{% trans 'Price' %}:</b>
+                                ${{tier.price}}
+                            </p>
+                            <b>
+                                {% trans 'Features' %}:
+                            </b>
+                            <ul>
+                                {% for feature in tier.features %}
+                                <li>{{feature}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <footer class="card-footer">
+                        <button type="button" onclick="openEditModal('{{ tier.package.id }}', '{{ tier.id }}')" class="card-footer-item"
+                            data-targe="tier-form-modal">Edit</button>
+                        <a href="{% url 'delete_tier' package.id tier.id %}" class="card-footer-item">
+                            Delete
+                        </a>
+                    </footer>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

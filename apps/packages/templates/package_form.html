@@ -7,10 +7,19 @@
 <!-- Load crispy forms -->
 {% load crispy_forms_tags %}
 
+<!-- Title -->
 {% block title %} {% sitename %} | {% trans 'Create package' %} {% endblock %}
 
+<!-- Navbar -->
 {% block navbar %} {% include 'partials/_nav.html' %} {% endblock navbar %}
 
+<!-- Head -->
+{% block head %}
+<script src="{% static 'js/bulma-modal.js' %}"></script>
+<script src="{% static 'js/packages.js' %}"></script>
+{% endblock head %}
+
+<!-- Content -->
 {% block content %}
 <h1 class="title">
     {% if package %}
@@ -21,153 +30,31 @@
 </h1>
 
 <form method="post">
-    <div class="mb-4" id="app"></div>
+    {% csrf_token %} {{ form|crispy }}
+
+    <!-- Tiers editor -->
+    {% if package %}
+    <div>
+        <div class="mb-0 mt-4 is-flex is-justify-content-space-between is-align-items-center">
+            <h5 class="title is-size-4-desktop is-size-5-tablet is-size-6-mobile mb-0">
+                {% trans 'Tiers' %}
+            </h5>
+            <button class="button is-secondary is-rounded is-small js-modal-trigger" type="button"
+                data-target="tier-form-modal" onclick="openCreateModal('{{ package.id }}')">
+                {% trans 'Add tier' %}
+            </button>
+        </div>
+
+        {% include 'partials/_tier_list.html' with tiers=tiers %}
+
+    </div>
+    {% endif %}
 
     <button class="button is-primary is-fullwidth is-rounded" type="submit">
         {% translate "Save" %}
     </button>
 </form>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.5.4/vue.global.prod.min.js"
-    integrity="sha512-daXDxACuUMgdw50LypY68sSM7Qksm/pJ207U8xLSv30B9J9YhU3wvHRZotKhBppjPgmatS6Cf2nkNxaImiHNyg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script async>
-    const template = `
-        <form method="post">
-            {{ package }}
-            {% csrf_token %}
-            <div class="columns is-multiline is-mobile">
-                <div class="column is-half-desktop is-full-tablet is-full-mobile">
-                    <div class="field">
-                        <label class="label">{% trans 'Name' %}</label>
-                        <div class="control">
-                            <input
-                                name="name"
-                                class="input"
-                                type="text"
-                                placeholder="{% trans 'Package name' %}"
-                                @change="onInputChange">
-                        </div>
-                    </div>
-                </div>
+{% include 'partials/_tier_form_modal.html' with csrf_token=csrf_token %}
 
-                <div class="column is-half-desktop is-full-tablet is-full-mobile">
-                    <div class="field">
-                        <label class="label">{% trans 'Description' %}</label>
-                        <div class="control">
-                            <input
-                                name="description"
-                                class="input"
-                                type="text"
-                                placeholder="{% trans 'Package description' %}"
-                                @change="onInputChange">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="column is-half-desktop is-full-tablet is-full-mobile">
-                    <label class="checkbox">
-                        <input type="checkbox" name="display_on_homepage" @change="onCheckboxChange">
-                        {% trans 'Display on homepage' %}
-                    </label>
-                </div>
-            </div>
-
-            <h4 class="title is-size-4-desktop is-size-5-tablet is-size-6-mobile">
-                {% trans 'Tiers' %}
-            </h4>
-            
-            <button type="button" class="button is-secondary is-rounded mt-" @click="addTier()">
-                {% trans 'Add tier' %}
-            </button>
-
-            <div class="fixed-grid has-3-cols-desktop has-2-cols-tablet has-1-cols-mobile mt-4">
-                <div class="grid">
-                    <div class="card mb-0 cell" v-for="(tier, index) in tiers" :key="index">
-                        <div class="card-content">
-                            <button type="button" class="delete is-top-right" aria-label="{% trans 'Delete tier' %}"
-                                @click="removeTier(index)"></button>
-                            <div class="field">
-                                <label class="label">{% trans 'Name' %}</label>
-                                <div class="control">
-
-                                    <input v-model="tier.name" class="input" type="text"
-                                        placeholder="{% trans 'Tier name' %}">
-                                </div>
-                            </div>
-                            
-                            <!-- Tier description -->
-                            <div class="field">
-                                <label class="label">{% trans 'Description' %}</label>
-                                <div class="control">
-                                    <input v-model="tier.description" class="input" type="text"
-                                        placeholder="{% trans 'Tier description' %}">
-                                </div>
-                            </div>
-                            
-                            <!-- Tier price -->
-                            <div class="field">
-                                <label class="label">{% trans 'Price' %}</label>
-                                <div class="control">
-                                    <input v-model="tier.price" class="input" type="number" min="0"
-                                        placeholder="{% trans 'Tier price' %}">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-    `
-    const { createApp, ref } = Vue
-
-    createApp({
-        setup() {
-            const package = ref({
-                name: '',
-                description: '',
-                display_on_homepage: false
-            })
-
-            const tiers = ref([])
-
-            const addTier = () => {
-                tiers.value.push({
-                    name: '',
-                    description: '',
-                    price: 0,
-                    features: ''
-                })
-            }
-
-            const removeTier = (index) => {
-                tiers.value.splice(index, 1)
-            }
-
-            const onCheckboxChange = (event) => {
-                package.value[event.target.name] = event.target.checked
-            }
-
-            const onInputChange = (event) => {
-                console.log(package)
-                package.value[event.target.name] = event.target.value
-            }
-
-            const onTierInputChange = (event, index) => {
-                tiers.value[index][event.target.name] = event.target.value
-            }
-
-            return {
-                tiers,
-                package,
-                addTier,
-                removeTier,
-                onCheckboxChange,
-                onInputChange,
-                onTierInputChange
-            }
-        },
-        template
-    }).mount('#app')
-</script>
 {% endblock content %}

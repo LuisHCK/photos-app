@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView
 from .models import Page
+from apps.packages.models import Package
 
 
 class HomepageView(TemplateView):
@@ -8,15 +9,14 @@ class HomepageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         page = None
-
-        print('HomepageView')
+        packages = Package.objects.filter(display_on_homepage=True)
 
         try:
             page = Page.objects.get(slug='homepage')
-            print('details', page.data['details'])
         except Page.DoesNotExist:
             print('Homepage data not found')
 
         context['page'] = page
+        context['packages'] = packages
         
         return context

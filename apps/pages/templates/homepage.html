@@ -42,7 +42,7 @@
 
             <img class="hero-logo" src="{% static 'img/logo-primary-large.avif' %}" alt="{% sitename %} logo" />
             <h2 class="subtitle has-text-primary mt-6">
-            {{ page.data.headline }}
+                {{ page.data.headline }}
             </h2>
         </div>
 
@@ -74,6 +74,60 @@
     </div>
 </section>
 
+<section class="packages-section" id="packages-section">
+    <div class="has-text-centered py-6">
+        {% for package in packages %}
+        <div class="has-text-centered">
+            <h4
+                class="title is-size-1-desktop is-size-2-tablet is-size-3-mobile has-text-primary mb-6 great-vibes-regular">
+                {{ package.name }}
+            </h4>
+
+            <div class="container is-mobile">
+                <div class="fixed-grid has-4-cols-desktop has-2-cols-tablet has-1-cols-mobile">
+                    <div class="grid">
+                        {% for tier in package.tiers %}
+                        <div class="col">
+                            <div class="box content">
+                                <h5
+                                    class="title is-size-4-desktop is-size-5-tablet is-size-6-mobile no-text-wrap has-text-primary">
+                                    {{ tier }}
+                                </h5>
+                                <ul class="has-text-left">
+                                    {% for feature in tier.features %}
+                                    <li>{{ feature|safe }}</li>
+                                    {% endfor %}
+                                </ul>
+
+                                <div class="has-text-center">
+                                    <h5 class="has-text-dark">${{ tier.price }}</h5>
+                                </div>
+
+                                <a href="#" class="button is-primary is-small is-rounded">
+                                    {% trans 'Schedule' %}
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Gallery -->
+                <div class="package-gallery-container">
+                    {% for photo_example in package.photo_examples %}
+                    <figure class="image is-9by16">
+                        <img class="image-cover" src="{{ photo_example.file.url }}"
+                            alt="photo example for {{ package }}" height="640" width="480" />
+                    </figure>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
 <footer class="footer">
     <div class="content has-text-centered">
         <p>
@@ -81,7 +135,10 @@
                 © {% sitename %} - {% now "Y" %} | {% trans 'All rights reserved' %}
             </strong>
             <br>
-            {% trans 'Unauthorized use, reproduction, or distribution of any images on this site is prohibited. For licensing or inquiries' %},
+            {% blocktrans %}
+            Unauthorized use, reproduction, or distribution of any images on this site is prohibited. For
+            licensing or inquiries
+            {% endblocktrans %}
             <a href="#">
                 {% trans 'please contact us.' %}
             </a>
@@ -89,5 +146,5 @@
     </div>
 </footer>
 
-<script async src="{% static 'js/homepage.js' %}"></script>
+<script src="{% static 'js/homepage.js' %}"></script>
 {% endblock content %}

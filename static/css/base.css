@@ -7,6 +7,8 @@
     --bulma-link-l: 79%;
     --secondary-color: #ccad8e;
     --light-color: #fff5ee;
+    --bulma-family-primary: Poppins, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue,
+        Helvetica, Arial, sans-serif;
 }
 
 body {
@@ -17,6 +19,14 @@ body {
 main {
     height: 100%;
     padding: 0 1rem;
+}
+
+.container.is-mobile {
+    padding: 0 1rem;
+
+    @media screen and (min-width: 758px) {
+        padding: auto;
+    }
 }
 
 .dashboard-icon {
@@ -51,4 +61,15 @@ main {
 
 .gap-1 {
     gap: 1rem;
+}
+
+.no-text-wrap {
+    white-space: nowrap;
+    text-wrap: nowrap;
+}
+
+.great-vibes-regular {
+    font-family: 'Great Vibes', cursive;
+    font-weight: 400;
+    font-style: normal;
 }
