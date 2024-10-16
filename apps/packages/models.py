@@ -11,7 +11,7 @@ class Package(models.Model):
                             verbose_name=_('Name'))
     description = models.TextField(verbose_name=_('Description'))
     image = models.ImageField(
-        upload_to='package_thumbnails', verbose_name=_('Image'))
+        upload_to='package_thumbnails', verbose_name=_('Image'), null=True, blank=True)
 
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_('Created at'))
