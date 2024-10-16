@@ -47,6 +47,8 @@ services:
             - "traefik.http.services.photos.loadbalancer.server.port=8180"
             - "traefik.http.middlewares.photos.redirectscheme.scheme=https"
             - "traefik.http.middlewares.photos.redirectscheme.permanent=true"
+            - "traefik.http.middlewares.photos.compress=true"
+            - "traefik.http.middlewares.photos.headers.customresponseheaders.Server="
         logging:
             driver: json-file
             options:
@@ -93,8 +95,7 @@ services:
             - "traefik.http.routers.static.tls=true"
             - "traefik.http.routers.static.tls.certresolver=le"
             - "traefik.http.services.static.loadbalancer.server.port=80"
-            # tell Traefik which middlewares we want to use on this container
-            - "traefik.http.middlewares.static.compress=true"
+            - "traefik.http.middlewares.static.headers.customrequestheaders.Cache-Control=max-age=2629800"
         logging:
             driver: json-file
             options:
