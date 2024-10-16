@@ -45,10 +45,14 @@ services:
             - "traefik.http.routers.photos.entrypoints=websecure"
             - "traefik.http.routers.photos.tls.certresolver=myresolver"
             - "traefik.http.services.photos.loadbalancer.server.port=8180"
-            - "traefik.http.middlewares.photos.redirectscheme.scheme=https"
-            - "traefik.http.middlewares.photos.redirectscheme.permanent=true"
-            - "traefik.http.middlewares.photos.compress=true"
-            - "traefik.http.middlewares.photos.headers.customresponseheaders.Server="
+            # Middlewares
+            - "traefik.http.middlewares.redirect-https.redirectscheme.scheme=https"
+            - "traefik.http.middlewares.redirect-https.redirectscheme.permanent=true"
+            - "traefik.http.middlewares.compress.compress=true"
+            - "traefik.http.middlewares.server.headers.customresponseheaders.Server="
+            # Apply middlewares
+            - "traefik.http.routers.photos.middlewares=redirect-https@docker,compress@docker,server@docker"
+
         logging:
             driver: json-file
             options:
@@ -95,7 +99,10 @@ services:
             - "traefik.http.routers.static.tls=true"
             - "traefik.http.routers.static.tls.certresolver=le"
             - "traefik.http.services.static.loadbalancer.server.port=80"
-            - "traefik.http.middlewares.static.headers.customrequestheaders.Cache-Control=max-age=2629800"
+            # Middlewares
+            - "traefik.http.middlewares.headers.headers.customrequestheaders.Cache-Control=max-age=2629800"
+            # Apply middlewares
+            - "traefik.http.routers.static.middlewares=headers@docker"
         logging:
             driver: json-file
             options:
