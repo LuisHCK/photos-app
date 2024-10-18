@@ -96,9 +96,9 @@ services:
             - "traefik.http.routers.static.tls.certresolver=le"
             - "traefik.http.services.static.loadbalancer.server.port=80"
             # Apply middlewares
-            - "traefik.http.routers.static.middlewares=cache-control"
+            - "traefik.http.routers.static.middlewares=static_cache_control"
             # Middlewares
-            - "traefik.http.middlewares.cache-control.headers.customrequestheaders.Cache-Control=max-age=2629800"
+            - "traefik.http.middlewares.static_cache_control.headers.customrequestheaders.Cache-Control=max-age=2629800"
         logging:
             driver: json-file
             options:
