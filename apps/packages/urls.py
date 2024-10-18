@@ -5,7 +5,8 @@ from .views import PackageListView, \
     TierCreateView, \
     TierUpdateView, \
     TiersListView, \
-    TierDeleteView
+    TierDeleteView, \
+    PhotoSampleDeleteView
 
 urlpatterns = [
     path('', PackageListView.as_view(), name='list_packages'),
@@ -17,4 +18,6 @@ urlpatterns = [
          TierUpdateView.as_view(), name='edit_tier'),
     path('<int:package_pk>/tiers/<int:pk>/delete/',
          TierDeleteView.as_view(), name='delete_tier'),
+    path('<int:pk>/photo-samples/<int:photo_sample_id>/delete/',
+         PhotoSampleDeleteView.as_view(), name='delete_photo_sample'),
 ]

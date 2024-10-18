@@ -7,6 +7,7 @@
     --bulma-link-l: 79%;
     --secondary-color: #ccad8e;
     --light-color: #fff5ee;
+    --dark-color: #53412b;
     --bulma-family-primary: Poppins, SF Pro, Segoe UI, Roboto, Oxygen, Ubuntu, Helvetica Neue,
         Helvetica, Arial, sans-serif;
 }
@@ -35,17 +36,24 @@ main {
 }
 
 .is-brand-dark {
-    color: #53412b;
+    color: var(--dark-color);
 }
 
 .image-cover {
     object-fit: cover;
+    object-position: center;
 }
 
 .is-top-right {
     position: absolute;
     top: 1rem;
     right: 1rem;
+}
+
+.is-top-right-mobile {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
 }
 
 .is-relative {
@@ -72,4 +80,8 @@ main {
     font-family: 'Great Vibes', cursive;
     font-weight: 400;
     font-style: normal;
+}
+
+.h-100 {
+    height: 100%;
 }

@@ -26,7 +26,7 @@
                             </b>
                             <ul>
                                 {% for feature in tier.features %}
-                                <li>{{feature}}</li>
+                                <li>{{feature|safe}}</li>
                                 {% endfor %}
                             </ul>
                         </div>

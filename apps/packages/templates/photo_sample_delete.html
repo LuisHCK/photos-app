@@ -1,0 +1,59 @@
+{% extends "_base.html" %}
+{% load static %}
+{% load i18n %}
+{% load custom_tags %}
+
+<!-- Title -->
+{% block title %} {% sitename %} | {% trans 'Delete sample photo' %} {% endblock %}
+
+<!-- Content -->
+{% block content %}
+
+<div class="container is-flex is-justify-content-center is-align-items-center is-flex-direction-column h-100">
+    <h1 class="title is-size-2-desktop is-size-3-tablet is-size-4-mobile">
+        {% trans 'Delete sample photo' %}
+    </h1>
+
+    <img class="image is-128x128 image-cover" src="{{ object.file.url }}" alt="{{ photo_sample.file.name }}" />
+
+    <p class="mb-4">
+        {% trans 'Are you sure you want to delete this sample photo?' %}
+    </p>
+
+    <form action="" method="post" onsubmit="handleSubmit(event)">
+        {% csrf_token %}
+        <button type="submit" class="button is-danger is-rounded"">
+            {% trans 'Delete' %}
+        </button>
+        <button type=" button" class="button is-secondary is-link is-rounded" onclick="onCancel()">
+            {% trans 'Cancel' %}
+        </button>
+    </form>
+</div>
+
+<script>
+    function onCancel() {
+        window.parent.postMessage('closePhotoSampleModal', '*')
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault()
+        const formData = new FormData(event.target)
+
+        // set loading state
+        const submitButton = event.target.querySelector('button[type="submit"]')
+        submitButton.disabled = true
+        submitButton.classList.add('is-loading')
+
+        fetch('', {
+            method: 'post',
+            body: formData
+        }).finally(function () {
+            window.parent.postMessage('closePhotoSampleModal', '*')
+            // remove loading state
+            submitButton.disabled = false
+            submitButton.classList.remove('is-loading')
+        })
+    }
+</script>
+{% endblock %}

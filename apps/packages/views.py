@@ -1,9 +1,10 @@
 from django.shortcuts import render
+from django.db import transaction
 from django.views.generic import ListView, FormView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
-from .models import Package, Tier
+from .models import Package, Tier, PhotoExample
 from .forms import PackageForm, TierForm
 
 
@@ -16,6 +17,17 @@ class PackageListView(LoginRequiredMixin, ListView):
         return Package.objects.all()
 
 
+def save_example_package_photos(package, request):
+    """Save example package photos."""
+    try:
+        with transaction.atomic():
+            for file in request.FILES.getlist('sample_photos'):
+                photo = PhotoExample(file=file, package=package)
+                photo.save()
+    except Exception as e:
+        print(e)
+
+
 class PackageCreateView(LoginRequiredMixin, FormView):
     model = Package
     form_class = PackageForm
@@ -25,13 +37,11 @@ class PackageCreateView(LoginRequiredMixin, FormView):
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         form.save()
-        return super().form_valid(form)
 
-    def _create_tier(self, tier):
-        """Create a tier and add it to the package."""
-        package = self.object
-        package.tiers.add(tier)
-        package.save()
+        # Save attached photos
+        save_example_package_photos(form.instance, self.request)
+
+        return super().form_valid(form)
 
 
 class PackageEditView(LoginRequiredMixin, UpdateView):
@@ -43,7 +53,17 @@ class PackageEditView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tiers'] = Tier.objects.filter(package=self.object)
+        context['photo_examples'] = PhotoExample.objects.filter(
+            package=self.object)
         return context
+
+    def form_valid(self, form):
+        form.save()
+
+        # Save attached photos
+        save_example_package_photos(form.instance, self.request)
+
+        return super(PackageEditView, self).form_valid(form)
 
     def _update_tier(self, tier):
         """Update a tier and add it to the package."""
@@ -139,3 +159,17 @@ class TierDeleteView(LoginRequiredMixin, DeleteView):
     def get_success_url(self):
         print('hola')
         return reverse_lazy('edit_package', kwargs={'pk': self.kwargs['package_pk']})
+
+
+class PhotoSampleDeleteView(LoginRequiredMixin, DeleteView):
+    model = PhotoExample
+    template_name = 'photo_sample_delete.html'
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
+
+    def get_object(self):
+        return PhotoExample.objects.get(id=self.kwargs['photo_sample_id'])
+
+    def get_success_url(self):
+        return reverse_lazy('edit_package', kwargs={'pk': self.kwargs['pk']})

@@ -29,11 +29,51 @@
     {% endif %}
 </h1>
 
-<form method="post">
+<form method="post" class="pb-4" enctype="multipart/form-data">
     {% csrf_token %} {{ form|crispy }}
 
     <!-- Tiers editor -->
     {% if package %}
+    <!-- Sample pictures -->
+    <label for="sample_photos" class="label">{% trans 'Sample photos' %}</label>
+    <div class="file has-name is-fullwidth">
+        <label class="file-label">
+            <input class="file-input" type="file" id="sample_photos" name="sample_photos" accept="image/*"
+                onchange="photoExampleOnChange(event)" multiple />
+            <span class="file-cta">
+                <span class="file-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="icon icon-tabler icons-tabler-outline icon-tabler-cloud-upload">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M7 18a4.6 4.4 0 0 1 0 -9a5 4.5 0 0 1 11 2h1a3.5 3.5 0 0 1 0 7h-1" />
+                        <path d="M9 15l3 -3l3 3" />
+                        <path d="M12 12l0 9" />
+                    </svg>
+                </span>
+                <span class="file-label">{% trans 'Upload a sample photo' %}</span>
+            </span>
+            <div class="file-name" id="sample-photos-name" data-label="{% trans 'No files selected' %}">
+                {% trans 'No files selected' %}
+            </div>
+        </label>
+    </div>
+
+    <div>
+        <div class="is-flex">
+            {% for photo_example in photo_examples %}
+            <div class="mr-4 is-relative">
+                <img src="{{ photo_example.file.url }}" class="image is-128x128 image-cover"
+                    alt="{{ photo_example.file.name }}" />
+                <button type="button" class="delete is-top-right-mobile"
+                    data-url="{% url 'delete_photo_sample' package.id photo_example.id %}"
+                    onclick="openDeleteSamplePhotoModal(event)">
+                </button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
     <div>
         <div class="mb-0 mt-4 is-flex is-justify-content-space-between is-align-items-center">
             <h5 class="title is-size-4-desktop is-size-5-tablet is-size-6-mobile mb-0">
@@ -50,11 +90,12 @@
     </div>
     {% endif %}
 
-    <button class="button is-primary is-fullwidth is-rounded" type="submit">
+    <button class="button is-primary is-fullwidth is-rounded mb-6" type="submit">
         {% translate "Save" %}
     </button>
 </form>
 
-{% include 'partials/_tier_form_modal.html' with csrf_token=csrf_token %}
+{% include 'partials/_tier_form_modal.html' %}
+{% include 'partials/_photo_sample_delete_modal.html' %}
 
 {% endblock content %}
