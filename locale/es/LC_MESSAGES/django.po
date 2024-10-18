@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-16 04:15+0000\n"
-"PO-Revision-Date: 2024-10-16 04:17+0000\n"
+"POT-Creation-Date: 2024-10-18 20:40+0000\n"
+"PO-Revision-Date: 2024-10-18 20:41+0000\n"
 "Last-Translator:   <luisjcenteno17@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -174,6 +174,17 @@ msgstr "Crear paquete"
 msgid "Edit package"
 msgstr "Editar paquete"
 
+#| msgid "Select photos"
+msgid "Sample photos"
+msgstr "Fotos de ejemplo"
+
+#| msgid "Download all photos"
+msgid "Upload a sample photo"
+msgstr "Subir fotos de ejemplo"
+
+msgid "No files selected"
+msgstr "No hay archivos seleccionados"
+
 msgid "Tiers"
 msgstr "Niveles"
 
@@ -194,6 +205,21 @@ msgstr "Precio"
 
 msgid "Features"
 msgstr "Beneficios"
+
+#| msgid "Select photos"
+msgid "Delete sample photo"
+msgstr "Borrar foto de ejemplo"
+
+#| msgid "Are you sure you want to delete this photo?"
+msgid "Are you sure you want to delete this sample photo?"
+msgstr "Estas seguro de eliminar esta foto?"
+
+#| msgid "Deleted"
+msgid "Delete"
+msgstr "Borrar"
+
+msgid "Cancel"
+msgstr "Cancelar"
 
 msgid "Package Tiers"
 msgstr "Niveles de paquete"
@@ -249,9 +275,6 @@ msgstr "Agendar"
 msgid "All rights reserved"
 msgstr "Todos los derechos reservados"
 
-#| msgid ""
-#| "Unauthorized use, reproduction, or distribution of any images on this site "
-#| "is prohibited. For licensing or inquiries"
 msgid ""
 "\n"
 "            Unauthorized use, reproduction, or distribution of any images on this site is prohibited. For\n"
