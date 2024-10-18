@@ -75,38 +75,21 @@
 </section>
 
 <section class="packages-section" id="packages-section">
-    <div class="has-text-centered py-6">
+    <div class="packages-list has-text-centered py-6">
         {% for package in packages %}
-        <div class="has-text-centered">
+        <div class="package-container has-text-centered">
             <h4
                 class="title is-size-1-desktop is-size-2-tablet is-size-3-mobile has-text-primary mb-6 great-vibes-regular">
                 {{ package.name }}
             </h4>
 
+            {% if package.tiers|length > 1 %}
             <div class="container is-mobile">
                 <div class="fixed-grid has-4-cols-desktop has-2-cols-tablet has-1-cols-mobile">
                     <div class="grid">
                         {% for tier in package.tiers %}
                         <div class="col">
-                            <div class="box content">
-                                <h5
-                                    class="title is-size-4-desktop is-size-5-tablet is-size-6-mobile no-text-wrap has-text-primary">
-                                    {{ tier }}
-                                </h5>
-                                <ul class="has-text-left">
-                                    {% for feature in tier.features %}
-                                    <li>{{ feature|safe }}</li>
-                                    {% endfor %}
-                                </ul>
-
-                                <div class="has-text-center">
-                                    <h5 class="has-text-dark">${{ tier.price }}</h5>
-                                </div>
-
-                                <a href="#" class="button is-primary is-small is-rounded">
-                                    {% trans 'Schedule' %}
-                                </a>
-                            </div>
+                            {% include 'partials/_package_tier.html' with tier=tier %}
                         </div>
                         {% endfor %}
                     </div>
@@ -122,6 +105,11 @@
                     {% endfor %}
                 </div>
             </div>
+            {% elif package.tiers|length == 1 %}
+            <div class="is-flex is-justify-content-center">
+                {% include 'partials/_package_tier.html' with tier=package.tiers.0 single_tier=True %}
+            </div>
+            {% endif %}
 
         </div>
         {% endfor %}

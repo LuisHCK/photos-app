@@ -141,6 +141,14 @@ main.container {
     border-right: none;
 }
 
+.package-container {
+    padding: 2rem 0;
+}
+
+.package-container:nth-child(even) {
+    background-color: var(--light-color);
+}
+
 .package-gallery-container {
     height: 400px;
     max-width: 720px;

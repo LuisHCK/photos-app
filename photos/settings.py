@@ -23,6 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Application definition
 SITE_NAME = os.environ.get('SITE_NAME', 'Photos')
+SITE_PHONE = os.environ.get('SITE_PHONE', '+1 (555) 555-5555')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')

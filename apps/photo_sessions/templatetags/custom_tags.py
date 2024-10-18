@@ -24,6 +24,16 @@ def siteauthor():
     return 'My Site Author'
 
 
+@register.simple_tag
+def sitephone():
+    return settings.SITE_PHONE
+
+
+@register.simple_tag
+def sitephoneurlsafe():
+    return settings.SITE_PHONE.replace('+', '').replace('(', '').replace(')', '').replace(' ', '')
+
+
 @register.filter
 def get_status_class_name(status):
     if (status == 'active'):

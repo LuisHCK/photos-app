@@ -1,0 +1,25 @@
+{% load i18n %}
+{% load custom_tags %}
+
+<div class="box content">
+    {% if not single_tier %}
+    <h5 class="title is-size-4-desktop is-size-5-tablet is-size-6-mobile no-text-wrap has-text-primary">
+        {{ tier }}
+    </h5>
+    {% endif %}
+
+    <ul class="has-text-left">
+        {% for feature in tier.features %}
+        <li>{{ feature|safe }}</li>
+        {% endfor %}
+    </ul>
+
+    <div class="has-text-center">
+        <h5 class="has-text-dark">${{ tier.price }}</h5>
+    </div>
+
+    <a href="https://wa.me/{% sitephoneurlsafe %}?text={% trans 'Hi, I am interested in the package' %}: {{ tier.package.name }}: {{ tier.name }}"
+        class="button is-primary is-small is-rounded" target="_blank" rel="noopener noreferrer">
+        {% trans 'Schedule' %}
+    </a>
+</div>
