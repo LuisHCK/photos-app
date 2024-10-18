@@ -75,7 +75,7 @@
 </section>
 
 <section class="packages-section" id="packages-section">
-    <div class="packages-list has-text-centered py-6">
+    <div class="packages-list has-text-centered">
         {% for package in packages %}
         <div class="package-container has-text-centered">
             <h4
@@ -98,7 +98,7 @@
                 <!-- Gallery -->
                 <div class="package-gallery-container">
                     {% for photo_example in package.photo_examples %}
-                    <figure class="image is-9by16">
+                    <figure class="image is-4by5">
                         <img class="image-cover" src="{{ photo_example.file.url }}"
                             alt="photo example for {{ package }}" height="640" width="480" />
                     </figure>

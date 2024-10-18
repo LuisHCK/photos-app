@@ -1,4 +1,6 @@
-{% load static %} {% load i18n %}
+{% load static %}
+{% load i18n %}
+
 <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="{% if user.is_authenticated %} {% url 'dashboard' %} {% endif %}">
@@ -29,7 +31,7 @@
         {% else %}
         <div class="navbar-start">
             <a href="{% url 'homepage' %}" class="navbar-item">{% trans 'Home' %}</a>
-            <a href="#" class="navbar-item">{% trans 'Pricing' %}</a>
+            <a href="#packages-section" class="navbar-item">{% trans 'Pricing' %}</a>
             <a href="#" class="navbar-item">{% trans 'Schedule a photo session' %}</a>
         </div>
         {% endif %}

@@ -1,6 +1,8 @@
 {% load i18n %}
+{% load custom_tags %}
+
 <a class="button is-secondary is-rounded {{ button_class }}"
-    href="https://wa.me/50512345678?text={% trans 'Hi, I need help with my photoshoot!' %}"
+    href="https://wa.me/{% sitephoneurlsafe %}?text={% trans 'Hi, I need help with my photoshoot!' %}"
     target="_blank"
     rel="noopener">
     <span class="icon">
