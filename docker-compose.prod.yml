@@ -29,7 +29,7 @@ services:
             context: .
             dockerfile: Dockerfile.prod
         command: >
-            sh -c "gunicorn photos.wsgi:application --bind 0.0.0.0:8180 --workers 3 --timeout 300"
+            sh -c "gunicorn photos.wsgi:application --bind 0.0.0.0:8180 --workers 1 --timeout 300"
         volumes:
             - .:/home/app/photos
             - uploads:/home/app/photos/uploads
