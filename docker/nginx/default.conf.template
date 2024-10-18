@@ -9,14 +9,14 @@ server {
     location /static {
         # checks for static file
         alias /home/app/photos/collected_static;
-        add_header Cache-Control "public";
+        add_header Cache-Control "max-age=2592000, public";
         expires 30d;
     }
 
     location /uploads {
         # checks for static file
         alias /home/app/photos/uploads;
-        add_header Cache-Control "public";
+        add_header Cache-Control "max-age=1296000, public";
         expires 15d;
     }
   }
