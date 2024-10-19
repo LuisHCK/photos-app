@@ -36,14 +36,11 @@
     </video>
     <div class="hero-body">
         <div class="container">
-            <h1 class="page-title title is-hidden">
-                {% trans 'Welcome' %}
-            </h1>
 
             <img class="hero-logo" src="{% static 'img/logo-primary-large.avif' %}" alt="{% sitename %} logo" width="640" height="330" />
-            <h2 class="subtitle has-text-primary mt-6">
+            <h1 class="subtitle has-text-primary mt-6">
                 {{ page.data.headline }}
-            </h2>
+            </h1>
         </div>
 
         <button class="scroll-to-content bounce has-text-primary" onclick="scrollToSecion('about')"
@@ -75,7 +72,7 @@
 </section>
 
 <section class="packages-section" id="packages-section">
-    <div class="packages-list has-text-centered py-6">
+    <div class="packages-list has-text-centered">
         {% for package in packages %}
         <div class="package-container has-text-centered">
             <h4
@@ -98,7 +95,7 @@
                 <!-- Gallery -->
                 <div class="package-gallery-container">
                     {% for photo_example in package.photo_examples %}
-                    <figure class="image is-9by16">
+                    <figure class="image is-4by5">
                         <img class="image-cover" src="{{ photo_example.file.url }}"
                             alt="photo example for {{ package }}" height="640" width="480" />
                     </figure>

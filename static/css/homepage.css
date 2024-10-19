@@ -143,6 +143,10 @@ main.container {
 
 .package-container {
     padding: 2rem 0;
+
+    @media screen and (min-width: 768px) {
+        padding: 4rem 0;
+    }
 }
 
 .package-container:nth-child(even) {
@@ -163,6 +167,10 @@ main.container {
 .package-gallery-container .image {
     width: 33.33%;
     height: 100%;
+}
+
+.package-gallery-container .image-cover {
+    border: 0.5rem solid hsl(var(--bulma-primary-h), var(--bulma-primary-s), var(--bulma-primary-l));
 }
 
 .bounce {

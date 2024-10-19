@@ -13,12 +13,21 @@ services:
             - "--entrypoints.web.address=:80"
             - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
             - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
-
+            - "--entrypoints.traefik.address=:8080"  # Enable Dashboard entrypoint
+            - "--api.dashboard=true"  # Enable Traefik dashboard
         ports:
             - "443:443"
+            - "8080:8080"  # Expose the dashboard port
         volumes:
             - "/var/run/docker.sock:/var/run/docker.sock"
             - "./letsencrypt:/letsencrypt"
+        labels:
+            - "traefik.http.routers.traefik.rule=Host(`${DOMAIN}`) && PathPrefix(`/traefik-dashboard`)"
+            - "traefik.http.routers.traefik.service=api@internal"
+            - "traefik.http.routers.traefik.entrypoints=traefik"
+            # Optional: Secure the dashboard with Basic Auth
+            - "traefik.http.middlewares.traefik-auth.basicauth.users=${DASHBOARD_AUTH_USERS}"
+            - "traefik.http.routers.traefik.middlewares=traefik-auth"
         logging:
             driver: json-file
             options:
