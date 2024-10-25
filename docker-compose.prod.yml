@@ -13,11 +13,8 @@ services:
             - "--entrypoints.web.address=:80"
             - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
             - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
-            - "--entrypoints.traefik.address=:8080"  # Enable Dashboard entrypoint
-            - "--api.dashboard=true"  # Enable Traefik dashboard
         ports:
             - "443:443"
-            - "8080:8080"  # Expose the dashboard port
         volumes:
             - "/var/run/docker.sock:/var/run/docker.sock"
             - "./letsencrypt:/letsencrypt"
@@ -90,7 +87,7 @@ services:
         volumes:
             - ./docker/nginx:/etc/nginx/templates
             - static:/home/app/photos/collected_static:ro
-            - ./uploads:/home/app/photos/uploads:ro
+            - uploads:/home/app/photos/uploads:ro
         env_file:
             - .env
         depends_on:
