@@ -53,15 +53,7 @@ services:
             - "traefik.http.services.photos.loadbalancer.server.port=8180"
             # Middlewares
             - "traefik.http.middlewares.photos_compress.compress=true"
-            - "traefik.http.routers.your_container_name.middlewares=photos_compress"
-            # Redirect /qr to https://linktr.ee/mdvfoto
-            - "traefik.http.routers.photos-qr.rule=Host(`${DOMAIN}`) && PathPrefix(`/qr`)"
-            - "traefik.http.routers.photos-qr.entrypoints=websecure"
-            - "traefik.http.routers.photos-qr.tls.certresolver=myresolver"
-            - "traefik.http.routers.photos-qr.middlewares=qr-redirect"
-            - "traefik.http.middlewares.qr-redirect.redirectregex.regex=^https?://([\\w.-]+)/qr/?$"
-            - "traefik.http.middlewares.qr-redirect.redirectregex.replacement=https://linktr.ee/mdvfoto"
-            - "traefik.http.middlewares.qr-redirect.redirectregex.permanent=false"
+            - "traefik.http.routers.photos.middlewares=photos_compress"
         logging:
             driver: json-file
             options:

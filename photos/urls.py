@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('', include('apps.pages.urls')),
@@ -32,6 +33,9 @@ urlpatterns = [
     path('packages/', include('apps.packages.urls')),
     re_path(r'^rosetta/', include('rosetta.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
+    urlpatterns += [
+        path('qr/', RedirectView.as_view(url='https://linktr.ee/mdvfoto', permanent=False)),
+    ]
 ]
 
 if settings.DEBUG:
