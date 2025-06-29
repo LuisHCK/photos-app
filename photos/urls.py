@@ -33,9 +33,7 @@ urlpatterns = [
     path('packages/', include('apps.packages.urls')),
     re_path(r'^rosetta/', include('rosetta.urls')),
     path('i18n/', include('django.conf.urls.i18n')),
-    urlpatterns += [
-        path('qr/', RedirectView.as_view(url='https://linktr.ee/mdvfoto', permanent=False)),
-    ]
+    path('qr/', RedirectView.as_view(url='https://linktr.ee/mdvfoto', permanent=False))
 ]
 
 if settings.DEBUG:
